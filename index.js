@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const path = require('path');
+var sizeOf = require('image-size');
 
 var sessions = [];
 
@@ -45,6 +46,25 @@ app.post('/verify', (req, res) => {
   }
 });
 
+app.get('/imagelist', (req, res) => {
+  // if(!tokenValid(req.body.token)){
+  //   res.send({Valid: false});
+  //   return;
+  // }
+
+  var images = [];
+
+  fs.readdir('./images/', (err, files) => {
+    files.forEach(file => {
+      var filename = file.replace(/\.[^/.]+$/, "");
+      var size = fs.statSync(`./images/${file}`).size;
+      var dimensions = sizeOf(`./images/${file}`);
+      images.push({id: filename, filename: filename, size: size, dimensions: dimensions});
+    });
+    res.send(images);
+  });
+});
+
 app.get('/:imageid', (req, res) => {
   var imageid = req.params.imageid;
   if(fs.existsSync(path.join(__dirname + '/images/' + imageid + '.png'))) {
@@ -80,8 +100,9 @@ function saveJson(file, json){
 }
 
 function tokenValid(token){
-  var response = false
-  for(i = 0; i < sessions; i++){
+  var response = false;
+  for(i = 0; i < sessions.length; i++){
+    console.log(sessions[i]);
     if(sessions[i].Token == token){
       response = true;
     }
