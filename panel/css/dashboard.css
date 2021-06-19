@@ -32,12 +32,23 @@ html {
   /* float: right; */
 }
 
+.table{
+  overflow-y: scroll;
+  height: 600px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
 .item{
   font-family: sans-serif;
   padding: 10px;
   border-radius: 10px;
   background-color: var(--white);
   color: var(--darker);
+}
+
+.item:not(:nth-child(1)){
+  margin-top: 5px;
 }
 
 .flex{
@@ -48,4 +59,10 @@ html {
   flex: 1 0 auto;
   margin: 5px;
   text-align: center;
+}
+
+img{
+  height: 50px;
+  width: auto;
+  border-radius: 10px;
 }

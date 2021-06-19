@@ -112,7 +112,7 @@ function tokenValid(token){
 
 async function countdown(){
   for(i = 0; i < sessions.length; i++){
-    if(sessions.Expires == 0){
+    if(sessions.Expires >= 0){
       sessions[i].splice(i, 1);
     }else{
       sessions[i].Expires--;
