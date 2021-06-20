@@ -20,6 +20,10 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname + '/panel/dashboard.html'));
 });
 
+app.get('/upload', (req, res) => {
+  res.sendFile(path.join(__dirname + '/panel/upload.html'));
+});
+
 app.post('/token', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;

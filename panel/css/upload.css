@@ -1,0 +1,52 @@
+body{
+  background-color: var(--black);
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.body{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  transform: translate(-50%, -50%);
+  /* background-color: red; */
+}
+
+.upload-btn{
+  background-color: var(--primary);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  margin-left: 100%;
+  transform: translateX(-100%);
+  /* float: right; */
+  width: 100px;
+}
+
+.body-upload{
+  background-color: var(--dark);
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+button{
+  background-color: var(--primary);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
