@@ -10,15 +10,21 @@
   <body>
     <div class="body">
       <div class="top">
-        <button type="button" name="button" class="upload-btn" onclick="window.location.href='/upload'">Go Back</button>
+        <button type="button" name="button" class="upload-btn" onclick="window.location.href='/dashboard'">Go Back</button>
       </div>
 
       <div class="body-upload">
-        <input type="file" name="" value="">
+        <input type="file" name="" value="" id="file_selector">
+        <br>
+        <br>
+        <button type="button" name="button" onclick="upload();">Upload</button>
+        <br>
+        <br>
+        <progress id="file" value="" max="" class="loading_bar" style="display: none;"></progress>
       </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="./cdn/js/upload.js"></script>
+    <script defer type="text/javascript" src="./cdn/js/upload.js"></script>
   </body>
 </html>

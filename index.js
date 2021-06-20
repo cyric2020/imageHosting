@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const path = require('path');
+const WebSocket = require('ws');
 var sizeOf = require('image-size');
 
 var sessions = [];
@@ -80,6 +81,18 @@ app.get('/:imageid', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
+});
+
+const wss = new WebSocket.Server({ port: 3001 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    if(message.endsWith('complete')){
+      console.log('Transfer complete');
+    }
+  });
+
+  ws.send('something');
 });
 
 function maketoken(length) {
