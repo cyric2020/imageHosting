@@ -20,7 +20,10 @@
         <button type="button" name="button" onclick="upload();">Upload</button>
         <br>
         <br>
-        <progress id="file" value="" max="" class="loading_bar" style="display: none;"></progress>
+        <div class="progress flex" id="file-container" style="display: none;">
+          <progress id="file" value="" max="" class="loading_bar flex-item"></progress>
+          <span id="upload-progress" class="flex-item">0%</span>
+        </div>
       </div>
     </div>
 

@@ -50,3 +50,24 @@ button{
   font-weight: 600;
   font-size: 16px;
 }
+
+/* .flex{
+  display: flex;
+}
+
+.flex-item{
+  flex: 1 0 auto;
+  margin: 5px;
+  text-align: center;
+} */
+
+progress{
+  width: 91%;
+}
+
+.progress{
+  width: 100%;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}

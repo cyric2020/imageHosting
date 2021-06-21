@@ -70,6 +70,37 @@ app.get('/imagelist', (req, res) => {
   });
 });
 
+app.post('/init_upload', (req, res) => {
+  var id = maketoken(5);
+  fs.open(`./temp/${id}.txt`, 'w', function(err){
+    if(err) throw err;
+    res.send({id: id});
+  });
+});
+
+app.post('/finish_upload', (req, res) => {
+  var body = req.body;
+  var id = body.id;
+
+  try{
+    if(fs.existsSync(`./temp/${id}.txt`)){
+      fs.readFile(`./temp/${id}.txt`, function(err, data){
+        if(err) throw err;
+
+        var content = data.toString();
+
+        let base64Image = content.split(';base64,').pop();
+
+        fs.writeFile(`./images/${id}.png`, base64Image, {encoding: 'base64'}, function(err) {
+          res.send({complete: true})
+        });
+      });
+    }
+  }catch(err){
+    console.error(err);
+  }
+})
+
 app.get('/:imageid', (req, res) => {
   var imageid = req.params.imageid;
   if(fs.existsSync(path.join(__dirname + '/images/' + imageid + '.png'))) {
@@ -87,8 +118,20 @@ const wss = new WebSocket.Server({ port: 3001 });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    if(message.endsWith('complete')){
-      console.log('Transfer complete');
+    if(!message.startsWith('{')){
+      console.log(message);
+      return;
+    }
+    var json = JSON.parse(message);
+    var id = json.id;
+    try{
+      if(fs.existsSync(`./temp/${id}.txt`)){
+        fs.appendFile(`./temp/${id}.txt`, json.message, function(err){
+          if(err) throw err;
+        });
+      }
+    }catch(err){
+      console.error(err);
     }
   });
 
@@ -97,7 +140,7 @@ wss.on('connection', function connection(ws) {
 
 function maketoken(length) {
     var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?-';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -129,8 +172,14 @@ function tokenValid(token){
 
 async function countdown(){
   for(i = 0; i < sessions.length; i++){
-    if(sessions.Expires >= 0){
-      sessions[i].splice(i, 1);
+    if(sessions[i].Expires <= 0){
+      try {
+        sessions.splice(i, 1);
+      } catch (e) {
+        console.log(e);
+      } finally {
+
+      }
     }else{
       sessions[i].Expires--;
     }
