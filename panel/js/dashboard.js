@@ -27,11 +27,19 @@ function loadImages(){
 
       var size = document.createElement('span');
       size.classList.add('flex-item');
-      size.innerHTML = '<b>Size: </b>' + data[i].size;
+      if(data[i].size/1000 < 1000){
+        size.innerHTML = '<b>Size: </b>' + Math.round(data[i].size/1000) + 'kb';
+      }else{
+        size.innerHTML = '<b>Size: </b>' + ((data[i].size/1000)/1000).toFixed(1) + 'mb';
+      }
 
       var dimensions = document.createElement('span');
       dimensions.classList.add('flex-item');
       dimensions.innerHTML = '<b>Dimensions: </b>' + `${data[i].dimensions.width}x${data[i].dimensions.height}`;
+
+      var button = document.createElement('button');
+      button.innerHTML = 'delete';
+      button.classList.add('delete-button');
 
       var table = document.getElementById('table');
       table.appendChild(div);
@@ -40,6 +48,7 @@ function loadImages(){
       div.appendChild(name);
       div.appendChild(size);
       div.appendChild(dimensions);
+      div.appendChild(button);
     }
   });
 }

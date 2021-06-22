@@ -103,6 +103,10 @@ app.post('/finish_upload', (req, res) => {
 
 app.get('/:imageid', (req, res) => {
   var imageid = req.params.imageid;
+});
+
+app.get('/cdn/:imageid', (req, res) => {
+  var imageid = req.params.imageid;
   if(fs.existsSync(path.join(__dirname + '/images/' + imageid + '.png'))) {
     res.sendFile(path.join(__dirname + '/images/' + imageid + '.png'));
   }else{
