@@ -1,0 +1,24 @@
+{
+  "name": "imagehosting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyric2020/imageHosting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyric2020/imageHosting/issues"
+  },
+  "homepage": "https://github.com/cyric2020/imageHosting#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "image-size": "^1.0.0",
+    "ws": "^8.4.0"
+  }
+}

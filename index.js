@@ -103,6 +103,11 @@ app.post('/finish_upload', (req, res) => {
 
 app.get('/:imageid', (req, res) => {
   var imageid = req.params.imageid;
+  if(fs.existsSync(path.join(__dirname + '/images/' + imageid + '.png'))) {
+    res.sendFile(path.join(__dirname + '/images/' + imageid + '.png'));
+  }else{
+    res.send('File does not exist.');
+  }
 });
 
 app.get('/cdn/:imageid', (req, res) => {
@@ -122,6 +127,8 @@ const wss = new WebSocket.Server({ port: 3001 });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
+    message = message.toString();
+    console.log(message);
     if(!message.startsWith('{')){
       console.log(message);
       return;

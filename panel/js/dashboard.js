@@ -20,6 +20,7 @@ function loadImages(){
       var image = document.createElement('img');
       image.classList.add('flex-item');
       image.src = url + '/' + data[i].id;
+      image.style.flex = '0 0 auto';
 
       var name = document.createElement('span');
       name.classList.add('flex-item');
@@ -37,6 +38,10 @@ function loadImages(){
       dimensions.classList.add('flex-item');
       dimensions.innerHTML = '<b>Dimensions: </b>' + `${data[i].dimensions.width}x${data[i].dimensions.height}`;
 
+      var linkSpan = document.createElement('span');
+      linkSpan.classList.add('flex-item');
+      linkSpan.innerHTML = `<b>Url:</b> <a href="${url}/${data[i].id}" target="_blank">${url}/${data[i].id}</a>`;
+
       var button = document.createElement('button');
       button.innerHTML = 'delete';
       button.classList.add('delete-button');
@@ -44,10 +49,24 @@ function loadImages(){
       var table = document.getElementById('table');
       table.appendChild(div);
 
+      var datadiv = document.createElement('div');
+      datadiv.classList.add('data');
+
+      var row1 = document.createElement('div');
+      row1.classList.add('row');
+      row1.appendChild(name);
+      row1.appendChild(size);
+      row1.appendChild(dimensions);
+      datadiv.appendChild(row1);
+
+      var row2 = document.createElement('div');
+      row2.classList.add('row');
+      row2.appendChild(linkSpan);
+      datadiv.appendChild(row2);
+
+
       div.appendChild(image);
-      div.appendChild(name);
-      div.appendChild(size);
-      div.appendChild(dimensions);
+      div.appendChild(datadiv);
       div.appendChild(button);
     }
   });

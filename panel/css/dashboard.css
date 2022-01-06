@@ -77,3 +77,14 @@ img{
   width: auto;
   border-radius: 10px;
 }
+
+.data{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.data .row{
+  display: flex;
+  flex-direction: row;
+}
