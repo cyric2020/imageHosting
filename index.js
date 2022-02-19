@@ -59,12 +59,12 @@ app.get('/imagelist', (req, res) => {
 
   var images = [];
 
-  fs.readdir('./images/', (err, files) => {
+  fs.readdir(`${__dirname}/images/`, (err, files) => {
     if(files == undefined || files == null) return [];
     files.forEach(file => {
       var filename = file.replace(/\.[^/.]+$/, "");
-      var size = fs.statSync(`./images/${file}`).size;
-      var dimensions = sizeOf(`./images/${file}`);
+      var size = fs.statSync(`${__dirname}/images/${file}`).size;
+      var dimensions = sizeOf(`${__dirname}/images/${file}`);
       images.push({id: filename, filename: filename, size: size, dimensions: dimensions});
     });
     res.send(images);
