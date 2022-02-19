@@ -60,6 +60,7 @@ app.get('/imagelist', (req, res) => {
   var images = [];
 
   fs.readdir('./images/', (err, files) => {
+    if(files.length == 0) return [];
     files.forEach(file => {
       var filename = file.replace(/\.[^/.]+$/, "");
       var size = fs.statSync(`./images/${file}`).size;
