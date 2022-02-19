@@ -24,7 +24,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
     reader.onerror = error => reject(error);
 });
 
-const socket = new WebSocket('ws://127.0.0.1:3001');
+const socket = new WebSocket('ws://192.168.0.14:3001');
 
 async function upload(){
   var loadingBar = document.getElementsByClassName('loading_bar')[0];

@@ -84,15 +84,15 @@ app.post('/finish_upload', (req, res) => {
   var id = body.id;
 
   try{
-    if(fs.existsSync(`./temp/${id}.txt`)){
-      fs.readFile(`./temp/${id}.txt`, function(err, data){
+    if(fs.existsSync(`${__dirname}/temp/${id}.txt`)){
+      fs.readFile(`${__dirname}/temp/${id}.txt`, function(err, data){
         if(err) throw err;
 
         var content = data.toString();
 
         let base64Image = content.split(';base64,').pop();
 
-        fs.writeFile(`./images/${id}.png`, base64Image, {encoding: 'base64'}, function(err) {
+        fs.writeFile(`${__dirname}/images/${id}.png`, base64Image, {encoding: 'base64'}, function(err) {
           res.send({complete: true})
         });
       });
