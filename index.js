@@ -60,7 +60,7 @@ app.get('/imagelist', (req, res) => {
   var images = [];
 
   fs.readdir('./images/', (err, files) => {
-    if(files.length == 0) return [];
+    if(files == undefined || filex == null) return [];
     files.forEach(file => {
       var filename = file.replace(/\.[^/.]+$/, "");
       var size = fs.statSync(`./images/${file}`).size;
@@ -73,7 +73,7 @@ app.get('/imagelist', (req, res) => {
 
 app.post('/init_upload', (req, res) => {
   var id = maketoken(5);
-  fs.open(`./temp/${id}.txt`, 'w', function(err){
+  fs.open(`${__dirname}/temp/${id}.txt`, 'w', function(err){
     if(err) throw err;
     res.send({id: id});
   });
